@@ -1,0 +1,121 @@
+<mat-toolbar color="primary" >
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="drawer.toggle()">
+     <!-- *ngIf="isHandset$ | async"  -->
+  
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+ 
+  <div>Live Stream</div>
+  
+</mat-toolbar>
+<div>
+<!-- sidenav container -->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav"  style="background-color: rgb(214, 243, 132);"
+    
+      mode="side"
+      [opened]="(isHandset$ | async) === true">
+      <button mat-button routerLink="/sidenav" >
+        <mat-icon style="font-size: 20px">home</mat-icon> Home
+      </button>
+     
+     
+  </mat-sidenav>
+  
+  <mat-sidenav-content >
+    <!-- Add Content Here -->
+   <body>
+     <div class="container-fluid">
+      
+         <form [formGroup]="livestreamdata" class="form-container" >
+           <div class="col-md-8">
+             <label for="title" >Title</label>
+             <input type="text" name="title" class="form-control" 
+             placeholder="Enter Live Stream Title" formControlName="title" >
+
+             <div *ngIf="title.invalid " style="color: rgb(231, 7, 7);">
+              Length should be less than 100</div>
+
+           </div>
+
+           <div class="col-md-8">
+            <label for="startdate">Start Date</label>
+            <input type="date" class="form-control" 
+            placeholder="Enter Live Stream Start Date" formControlName="startdate" >
+
+            <div *ngIf="startdate.invalid" style="color: rgb(231, 7, 7);">Start date Error
+
+            </div>
+
+          </div>
+
+          <div class="col-md-8">
+            <label for="starttime">Start Time</label>
+            <input type="time" class="form-control" 
+            placeholder="Enter Live Stream Start Time" formControlName="starttime">
+
+            <div *ngIf="starttime.invalid" style="color: rgb(231, 7, 7);">Start Time Error
+
+            </div>
+
+          </div>
+
+          <div class="col-md-8">
+            <label for="enddate">End Date</label>
+            <input type="date" class="form-control" 
+            placeholder="Enter Live Stream End Date" formControlName="enddate" [readonly]="startdate.invalid">
+
+            <div *ngIf="enddate.invalid" style="color: rgb(231, 7, 7);">select date after the start date
+
+            </div>
+
+          </div>
+
+          <div class="col-md-8">
+            <label for="endtime">End Time</label>
+            <input type="time" class="form-control"  placeholder="Enter Live Stream End Time" 
+            formControlName="endtime">
+
+            <div *ngIf="endtime.invalid" style="color: rgb(231, 7, 7);">End Time Error
+
+            </div>
+
+          </div>
+
+          <div class="col-md-8">
+            <label for="eventdetails">Event Details</label>
+            <input type="text" class="form-control"  placeholder="Enter Live Stream Event Details">
+
+          </div>
+
+          
+          <div class="col-md-8">
+            <label class="mr-sm-2" for="guest">Guest List</label>
+            <select class="custom-select mr-sm-2 drop form-control" class="form-control" id="endtime" >
+              <option >Guest list</option>
+              <option >selena Gomez</option>
+              <option >Ariana Grande</option>
+              <option >Kim Kardashian</option>
+              <option >Vin Diesel</option>
+              <option >Tom cruize</option>
+              <option >Robert Downey</option>
+              <option >Jhon Christopher Depp</option>
+            </select>
+          </div>
+          <br>
+
+          <button type="submit" [disabled]="!livestreamdata.valid" class="btn btn-primary"
+            (click)="submitdata()" style="background-color: crimson;">Submit</button>
+
+         </form>
+      
+     </div>
+   </body>
+     
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

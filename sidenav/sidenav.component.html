@@ -1,0 +1,76 @@
+<mat-toolbar color="primary" >
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+     <!-- *ngIf="isHandset$ | async"  -->
+  
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+ 
+  <div>ViewTube</div>
+  
+  <mat-form-field class="mx-auto">
+        <input type="text" matInput placeholder="Search" />
+        <button mat-button><mat-icon>search</mat-icon></button>
+        <button mat-button>
+          <mat-icon>mic</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-button>
+        <mat-icon>
+            <span matBadge="5"matBadgePosition="above after"matBadgeOverlap="false">
+                </span> notifications </mat-icon>
+
+        <mat-menu #menu="matMenu" xPosition="after" yPosition="above">
+          <button mat-menu-item>
+
+            <mat-icon><span></span>settings</mat-icon>Settings</button>
+
+          <button mat-menu-item>
+            <mat-icon><span></span>help</mat-icon>Help </button>
+          <button mat-menu-item>
+            <mat-icon><span></span>notifications_off</mat-icon>Disable alerts
+          </button>
+          <button mat-menu-item disabled="">
+            <mat-icon><span></span>feedback</mat-icon>Send Feedback
+          </button>
+        </mat-menu>
+      </button>
+      <button mat-button routerLink="/video-upload" ><mat-icon>videocam</mat-icon></button>
+
+      <button mat-button><mat-icon>apps</mat-icon></button>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>person</mat-icon>
+      </button>
+</mat-toolbar>
+<!-- sidenav container -->
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav #drawer class="sidenav" 
+    
+      mode="side"
+      [opened]="(isHandset$ | async) === true">
+      <button mat-button>
+        <mat-icon style="font-size: 20px">home</mat-icon> Home</button>
+
+      <button mat-button>
+        <mat-icon style="font-size: 20px">explore</mat-icon> Explore</button>
+
+      <button mat-button>
+        <mat-icon style="font-size: 20px">subscriptions</mat-icon> subscriptions </button>
+
+      <button mat-button>
+        <mat-icon style="font-size: 20px">video_library</mat-icon> Library</button>
+
+      <button mat-button>
+        <mat-icon style="font-size: 20px"><span></span>history</mat-icon> History
+      </button>
+  </mat-sidenav>
+  <app-chips-bar></app-chips-bar>
+  <mat-sidenav-content>
+    <!-- Add Content Here -->
+    <app-chips-bar></app-chips-bar>
+
+  <app-video-content ></app-video-content>
+  <app-video-upload ></app-video-upload> 
+</mat-sidenav-content >
+</mat-sidenav-container>
